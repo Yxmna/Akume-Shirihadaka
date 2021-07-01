@@ -1,0 +1,14 @@
+{
+  "name": "akume-shirihadaka",
+  "version": "1.0.0",
+  "description": "Akume Shirihadaka",
+  "main": "Akume.js",
+  "scripts": {
+    "start": "node Akume.js"
+  },
+  "author": "Yomna",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "discord.js": "^13.0.0-dev.0d0c8f07f2535dd315ca95abe35e848c13d0ddf5"
+  }
+}

@@ -36,6 +36,13 @@ categorys.forEach((category, i) => {
 // ----------------------------------------------------------------------------------
 // INTERACTION RECU
 Akume.on('interaction', interaction => {
+  if (!interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("VIEW_CHANNEL") || !interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("SEND_MESSAGES")) {
+    interaction.reply({
+      content: "Je n'ai pas la permission de parler et/ou d'écrire dans ce salon",
+      ephemeral: true
+    })
+    return;
+  };
   if (!interaction.isCommand()) return;
   let props = {
     interaction: interaction,
@@ -57,7 +64,8 @@ Akume.on('interaction', interaction => {
 // MESSAGE RECU
 Akume.on('message', message => {
   if (message.author.bot) return;
-  if (message.content == "<@!613486608624254986>") {
+  if (!message.guild.me.permissionsIn(message.channel).toArray().includes("VIEW_CHANNEL") || !message.guild.me.permissionsIn(message.channel).toArray().includes("SEND_MESSAGES")) return;
+  if (message.content == "<@!" + Akume.user.id + ">") {
     let props = {
       interaction: message,
       functions: functions,
@@ -97,7 +105,7 @@ Akume.on("ready", async () => {
     Akume.application.commands.create(command).then().catch(function(err) {
       console.log(err);
     })
-    // Akume.guilds.cache.get('574238344121417729').commands.create(command);
+    // Akume.guilds.cache.get("574238344121417729").commands.create(command);
   })
 })
 // ----------------------------------------------------------------------------------

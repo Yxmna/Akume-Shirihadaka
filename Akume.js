@@ -1,4 +1,3 @@
-
 // ----------------------------------------------------------------------------------
 // VARIABLES
 const Discord = require('discord.js');
@@ -95,7 +94,10 @@ Akume.on("ready", async () => {
         value: "toutes_les_commandes"
       })
     }
-    Akume.guilds.cache.get('574238344121417729').commands.create(command);
+    Akume.application.commands.create(command).then().catch(function(err) {
+      console.log(err);
+    })
+    // Akume.guilds.cache.get('574238344121417729').commands.create(command);
   })
 })
 // ----------------------------------------------------------------------------------

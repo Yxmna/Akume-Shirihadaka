@@ -17,9 +17,9 @@ module.exports = {
     const emojis_embed = functions.createEmbed()
       .setAuthor(int.guild.name, int.guild.iconURL())
       .setTitle("Listes des emojis")
-    int.guild.emojis.cache.forEach((emoji, i) => {
-      emojis_embed.addField("<:" +  emoji.name + ":" + emoji.id + ">  _ _ :" + emoji.name + ":" , "`<:" +  emoji.name + ":" + emoji.id + ">`", false)
-    });
+    let emojis = int.guild.emojis.cache.map(emoji => "<:" +  emoji.name + ":" + emoji.id + ">");
+    emojis = emojis.map(emoji => emoji + "  `" + emoji + "`")
+    emojis_embed.setDescription(emojis.join("\n"))
     // ----------------------------------------------------------------------------------
 
     // ----------------------------------------------------------------------------------

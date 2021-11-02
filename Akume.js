@@ -17,7 +17,6 @@ const categorys = fs.readdirSync("./commands").map(category => category.split("-
 const token = require('./key.json');
 const config = require('./config.json');
 const functions = require("./functions.js");
-// var prefix = "";
 var version = "1.0.0";
 // ----------------------------------------------------------------------------------
 
@@ -35,15 +34,16 @@ categorys.forEach((category, i) => {
 
 // ----------------------------------------------------------------------------------
 // INTERACTION RECU
-Akume.on('interaction', interaction => {
-  if (!interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("VIEW_CHANNEL") || !interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("SEND_MESSAGES")) {
+Akume.on('interactionCreate', interaction => {
+  if (!interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("VIEW_CHANNEL") || !interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("SEND_MESSAGES") || !interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("EMBED_LINKS")) {
     interaction.reply({
-      content: "Je n'ai pas la permission de parler et/ou d'écrire dans ce salon",
+      content: "Je n'ai pas la permission de voir et/ou d'écrire et/ou d'intégrer des liens dans ce salon",
       ephemeral: true
     })
     return;
   };
   if (!interaction.isCommand()) return;
+  // console.log("INTERACTION: " + interaction.commandName);
   let props = {
     interaction: interaction,
     functions: functions,
@@ -51,7 +51,6 @@ Akume.on('interaction', interaction => {
     version: version,
     buttons: MessageButton,
     actionrow: MessageActionRow,
-    discord: Discord,
     akume: Akume,
     categorys: categorys
   }
@@ -62,7 +61,7 @@ Akume.on('interaction', interaction => {
 
 // ----------------------------------------------------------------------------------
 // MESSAGE RECU
-Akume.on('message', message => {
+Akume.on('messageCreate', message => {
   if (message.author.bot) return;
   if (!message.guild.me.permissionsIn(message.channel).toArray().includes("VIEW_CHANNEL") || !message.guild.me.permissionsIn(message.channel).toArray().includes("SEND_MESSAGES")) return;
   if (message.content == "<@!" + Akume.user.id + ">") {
@@ -85,9 +84,11 @@ Akume.on('message', message => {
 // ----------------------------------------------------------------------------------
 // AKUME PRET
 Akume.on("ready", async () => {
+  // Akume.guilds.cache.get("658715456768573470").commands.set([]);
   console.log("Akume est prète");
   console.log("----------------------------------------------------------------------------------");
   console.log();
+  // /*
   Akume.commands.each((command) => {
     if (command.name == "help") {
       command.options[0].choices = Akume.commands.map(function(cmd) {
@@ -105,8 +106,9 @@ Akume.on("ready", async () => {
     Akume.application.commands.create(command).then().catch(function(err) {
       console.log(err);
     })
-    // Akume.guilds.cache.get("574238344121417729").commands.create(command);
+    // Akume.guilds.cache.get("658715456768573470").commands.create(command);
   })
+// */
 })
 // ----------------------------------------------------------------------------------
 

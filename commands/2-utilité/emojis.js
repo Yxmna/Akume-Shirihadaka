@@ -1,25 +1,44 @@
 module.exports = {
   name: "emojis",
-  description: "Affiche les emojis du serveur",
+  description: "Afficher les emojis du serveur",
+  options: [{
+    name: "type",
+    type: "STRING",
+    description: "Choisir le type de liste",
+    required: false,
+    choices: [{
+      name: "liste simple",
+      value: "liste"
+    }, {
+      name: "liste avec ID",
+      value: "détaillé"
+    }]
+  }],
   category: "utilité",
   sample: "/emojis",
   accessableby: "all",
   status: 1,
-  execute(props) {
+  async execute(props) {
     // ----------------------------------------------------------------------------------
     // VARIABLES
     const int = props.interaction;
     const functions = props.functions;
+    var embed_color = await functions.getConfigFor(int.guild, "emojis", "embed-color");
+    var embed_image = await functions.getConfigFor(int.guild, "emojis", "embed-image");
     // ----------------------------------------------------------------------------------
 
     // ----------------------------------------------------------------------------------
     // CRÉATION DE L'EMBED
-    const emojis_embed = functions.createEmbed()
+    let emojis = int.guild.emojis.cache.map(emoji => "<:" + emoji.name + ":" + emoji.id + ">");
+    const emojis_embed = functions.createEmbed(embed_color, embed_image)
       .setAuthor(int.guild.name, int.guild.iconURL())
-      .setTitle("Listes des emojis")
-    let emojis = int.guild.emojis.cache.map(emoji => "<:" +  emoji.name + ":" + emoji.id + ">");
-    emojis = emojis.map(emoji => emoji + "  `" + emoji + "`")
-    emojis_embed.setDescription(emojis.join("\n"))
+      .setFooter(emojis.length + " émojis")
+    if (int.options.get("type") && int.options.get("type").value == "détaillé") {
+      emojis = emojis.map(emoji => emoji + "  `" + emoji + "`")
+      emojis_embed.setDescription(emojis.join("\n"))
+    } else {
+      emojis_embed.setDescription(emojis.join("  "))
+    }
     // ----------------------------------------------------------------------------------
 
     // ----------------------------------------------------------------------------------

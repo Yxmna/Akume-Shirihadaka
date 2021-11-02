@@ -4,57 +4,57 @@ module.exports = {
   options: [{
     name: "question",
     type: "STRING",
-    description: "Choisi le titre ou la question du sondage",
+    description: "Choisir le titre ou la question du sondage",
     required: true,
   }, {
     name: "choix-1",
     type: "STRING",
-    description: "Défini le 1er choix",
+    description: "Définir le 1er choix",
     required: true,
   }, {
     name: "choix-2",
     type: "STRING",
-    description: "Défini le 2ème choix",
+    description: "Définir le 2ème choix",
     required: true,
   }, {
     name: "choix-3",
     type: "STRING",
-    description: "Défini le 3ème choix",
+    description: "Définir le 3ème choix",
     required: false,
   }, {
     name: "choix-4",
     type: "STRING",
-    description: "Défini le 4ème choix",
+    description: "Définir le 4ème choix",
     required: false,
   }, {
     name: "choix-5",
     type: "STRING",
-    description: "Défini le 5ème choix",
+    description: "Définir le 5ème choix",
     required: false,
   }, {
     name: "choix-6",
     type: "STRING",
-    description: "Défini le 6ème choix",
+    description: "Définir le 6ème choix",
     required: false,
   }, {
     name: "choix-7",
     type: "STRING",
-    description: "Défini le 7ème choix",
+    description: "Définir le 7ème choix",
     required: false,
   }, {
     name: "choix-8",
     type: "STRING",
-    description: "Défini le 8ème choix",
+    description: "Définir le 8ème choix",
     required: false,
   }, {
     name: "choix-9",
     type: "STRING",
-    description: "Défini le 9ème choix",
+    description: "Définir le 9ème choix",
     required: false,
   }, {
     name: "type-de-sondage",
     type: "STRING",
-    description: "Défini le type de sondage",
+    description: "Définir le type de sondage",
     required: false,
     choices: [{
       name: "multiple",
@@ -64,7 +64,6 @@ module.exports = {
       value: "unique"
     }]
   }],
-  fullname: "Sondage",
   category: "utilité",
   accessableby: "all",
   sample: "/poll `question:Aimez-vous Akume ?` `choix-1:Oui` `choix-2:Forcément` `choix-3:Évidemment` `choix-4:Bien sûr` `type-de-sondage:unique`",
@@ -77,18 +76,21 @@ module.exports = {
     const MessageButton = props.buttons;
     const MessageActionRow = props.actionrow;
     const Akume = props.akume;
-    // var buttons_ids = {};
-    // let votes = {};
     var view_id = "view_" + Math.floor(Math.random() * 100000);
     var components = []
     var poll_emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"];
+    var color_emojis = await functions.getConfigFor(int.guild, "poll", "random");
+    var size = await functions.getConfigFor(int.guild, "poll", "size");
+    var color = await functions.getConfigFor(int.guild, "poll", "color");
+    if (color == "random") color = color_emojis[Math.floor(Math.random() * color_emojis.length)];
+    var embed_color = await functions.getConfigFor(int.guild, "poll", "embed-color");
+    var embed_image = await functions.getConfigFor(int.guild, "poll", "embed-image");
     // ----------------------------------------------------------------------------------
-
 
     // ----------------------------------------------------------------------------------
     // CREATION DES CHOIX
     let choices = [];
-    for (var i = 0; i < int.options.size; i++) {
+    for (var i = 0; i < int.options.data.length; i++) {
       if (int.options.get("choix-" + (i + 1))) {
         let obj = {
           value: int.options.get("choix-" + (i + 1)).value + " ",
@@ -100,7 +102,6 @@ module.exports = {
     }
     // ----------------------------------------------------------------------------------
 
-
     // ----------------------------------------------------------------------------------
     // CREATION DES BOUTONS
     row_1 = new MessageActionRow()
@@ -108,25 +109,25 @@ module.exports = {
     for (var i = 0; i < choices.length; i++) {
       if (i / 4 > 1) {
         row_2.addComponents(new MessageButton()
-          .setCustomID(choices[i].button_id)
+          .setCustomId(choices[i].button_id)
           .setStyle("PRIMARY")
           .setEmoji(poll_emojis[i]))
       } else {
         row_1.addComponents(new MessageButton()
-          .setCustomID(choices[i].button_id)
+          .setCustomId(choices[i].button_id)
           .setStyle("PRIMARY")
           .setEmoji(poll_emojis[i]))
       }
     }
     if ((choices.length + 1) > 5) {
       row_2.addComponents(new MessageButton()
-        .setCustomID(view_id)
+        .setCustomId(view_id)
         .setStyle("SECONDARY")
         .setLabel("Mes votes"))
       components = [row_1, row_2]
     } else {
       row_1.addComponents(new MessageButton()
-        .setCustomID(view_id)
+        .setCustomId(view_id)
         .setStyle("SECONDARY")
         .setLabel("Mes votes"))
       components = [row_1]
@@ -136,7 +137,7 @@ module.exports = {
     // ----------------------------------------------------------------------------------
     // CREATION DE L'EMBED & ENVOIS DU MESSAGE
     int.reply({
-      embeds: [makeEmbed(0, 12)],
+      embeds: [makeEmbed(0)],
       components: components
     })
     // ----------------------------------------------------------------------------------
@@ -147,7 +148,7 @@ module.exports = {
       var bar = "";
       for (var i = 0; i < size; i++) {
         if (x - i > 0) {
-          bar += "🟩";
+          bar += color;
         } else {
           bar += "⬛";
         }
@@ -159,12 +160,11 @@ module.exports = {
     // ----------------------------------------------------------------------------------
     // FONCTION DE LA CREATION DE L'EMBED
     function makeEmbed(total) {
-      const poll_embed = functions.createEmbed()
+      const poll_embed = functions.createEmbed(embed_color, embed_image)
         .setTitle(int.options.get("question").value)
         .setAuthor(int.user.username, int.user.avatarURL())
-        .setImage()
       for (var i = 0; i < choices.length; i++) {
-        poll_embed.addField(choices[i].value, poll_emojis[i] + "\xa0\xa0" + makeBar((choices[i].votes.length / total * 12), 12));
+        poll_embed.addField(choices[i].value, poll_emojis[i] + "\xa0\xa0" + makeBar((choices[i].votes.length / total * size), size));
       }
       return poll_embed;
     }
@@ -173,18 +173,19 @@ module.exports = {
 
     // ----------------------------------------------------------------------------------
     // SI INTERACTION
-    Akume.on('interaction', interaction => {
+    Akume.on('interactionCreate', interaction => {
       if (interaction.componentType !== "BUTTON") return;
 
       let verify = false;
       for (var i = 0; i < choices.length; i++) {
-        if (choices[i].button_id == interaction.customID) {
+        if (choices[i].button_id == interaction.customId) {
           verify = true;
         }
       }
-      if (!verify && interaction.customID != view_id) return;
+      if (!verify && interaction.customId != view_id) return;
 
-      if (interaction.customID == view_id) {
+
+      if (interaction.customId == view_id) {
         let user_votes = choices.filter(choice => choice.votes.includes(interaction.user.id)).map(choice => choice.value);
         if (user_votes.length > 0) {
           interaction.reply({
@@ -193,7 +194,7 @@ module.exports = {
           })
         } else {
           interaction.reply({
-            content: "Vous n'avez pas encore voté 😕 ",
+            content: "Vous n'avez pas voté 😕 ",
             ephemeral: true
           })
         }
@@ -201,7 +202,7 @@ module.exports = {
       }
 
       for (var i = 0; i < choices.length; i++) {
-        if (choices[i].button_id == interaction.customID) {
+        if (choices[i].button_id == interaction.customId) {
           if (choices[i].votes.includes(interaction.user.id)) {
             choices[i].votes = choices[i].votes.filter(function(value) {
               return value != interaction.user.id;

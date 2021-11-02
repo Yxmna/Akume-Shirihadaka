@@ -1,6 +1,6 @@
 module.exports = {
   name: "coin",
-  description: "Joue à pile ou face",
+  description: "Jouer à pile ou face",
   category: "fun",
   sample: "/coin",
   accessableby: "all",

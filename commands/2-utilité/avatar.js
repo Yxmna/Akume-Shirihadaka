@@ -1,21 +1,22 @@
 module.exports = {
   name: "avatar",
-  description: "Affiche l'avatar",
+  description: "Afficher l'avatar",
   options: [{
     name: "utilisateur",
     type: "USER",
-    description: "Choisi une personne avec son ID ou en la mentionnant",
+    description: "Choisir une personne avec son ID ou en la mentionnant",
     required: false
   }],
   category: "utilité",
   sample: "/avatar `utilisateur:@Akume`",
   accessableby: "all",
   status: 1,
-  execute(props) {
+  async execute(props) {
     // ----------------------------------------------------------------------------------
     // VARIABLES
     const int = props.interaction;
     const functions = props.functions;
+    var embed_color = await functions.getConfigFor(int.guild, "avatar", "embed-color");
     // ----------------------------------------------------------------------------------
 
     // ----------------------------------------------------------------------------------
@@ -30,7 +31,7 @@ module.exports = {
 
     // ----------------------------------------------------------------------------------
     // CRÉATION DE L'EMBED
-    const avatar_embed = functions.createEmbed()
+    const avatar_embed = functions.createEmbed(embed_color)
       .setThumbnail(user.avatarURL({
         dynamic: true
       }))

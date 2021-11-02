@@ -1,0 +1,39 @@
+{
+  "general": {
+    "color": "random",
+    "size": "14",
+    "random": ["🟥", "🟧", "🟨", "🟩", "🟦", "🟪", "🟫"],
+    "embed-color": "#202225",
+    "embed-image": "https://cdn.discordapp.com/attachments/822787638615474176/904669380485447700/split-bar.png",
+    "lang": "fr"
+  },
+  "config": {
+    "embed-color": "#202225",
+    "embed-image": "https://cdn.discordapp.com/attachments/822787638615474176/904669380485447700/split-bar.png"
+  },
+  "help": {
+    "embed-color": "#202225",
+    "embed-image": "https://cdn.discordapp.com/attachments/822787638615474176/904669380485447700/split-bar.png"
+  },
+  "avatar": {
+    "embed-color": "#202225"
+  },
+  "emojis": {
+    "embed-color": "#202225",
+    "embed-image": "https://cdn.discordapp.com/attachments/822787638615474176/904669380485447700/split-bar.png"
+  },
+  "permissions": {
+    "embed-color": "#202225",
+    "embed-image": "https://cdn.discordapp.com/attachments/822787638615474176/904669380485447700/split-bar.png"
+  },
+  "poll": {
+    "color": "random",
+    "size": "14",
+    "random": ["🟥", "🟧", "🟨", "🟩", "🟦", "🟪", "🟫"],
+    "embed-color": "#202225",
+    "embed-image": ""
+  },
+  "profile": {
+    "embed-color": "#202225"
+  }
+}

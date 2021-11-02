@@ -1,7 +1,30 @@
 const Discord = require('discord.js');
+const {
+  MessageActionRow,
+  MessageButton
+} = require("discord.js");
+const default_config = require("./default_config.json");
 
 module.exports = {
 
+  createEmbed: function(color, image) {
+    let embed = new Discord.MessageEmbed();
+    if (color) {
+      try {
+        embed.setColor(color);
+      } catch {
+
+      }
+    }
+    if (image) {
+      try {
+        embed.setImage(image);
+      } catch {
+
+      }
+    }
+    return embed;
+  },
 
   readPermissions: function(permissions) {
     let perm = [];
@@ -226,30 +249,30 @@ module.exports = {
           break;
         case "REQUEST_TO_SPEAK":
           perm.push({
-            category: "",
-            name: "REQUEST_TO_SPEAK",
-            description: ""
+            category: "Permissions de salon vocal",
+            name: "Commencer les activités",
+            description: "Permet aux membres de lancer une activité sur ce serveur"
           });
           break;
         case "MANAGE_THREADS":
           perm.push({
-            category: "",
-            name: "MANAGE_THREADS",
-            description: ""
+            category: "Permissions de salon textuel",
+            name: "Gérer les fils",
+            description: "Permet aux membres d'activer le mode lent, de renommer, de supprimer et d'archiver/de désarchiver des fils. Ils peuvent également consulter les fils privés"
           });
           break;
         case "USE_PUBLIC_THREADS":
           perm.push({
-            category: "",
-            name: "USE_PUBLIC_THREADS",
-            description: ""
+            category: "Permissions de salon textuel",
+            name: "Créer des fils publics",
+            description: "Autoriser les membres à créer des fils que tout le monde dans un salon peut voir"
           });
           break;
         case "USE_PRIVATE_THREADS":
           perm.push({
-            category: "",
-            name: "USE_PRIVATE_THREADS",
-            description: ""
+            category: "Permissions de salon textuel",
+            name: "Créer des fils privés",
+            description: "Autoriser les membres à créer des fils sur invitation"
           });
           break;
         case "ADMINISTRATOR":
@@ -264,10 +287,10 @@ module.exports = {
     return perm;
   },
 
-
-
-  readStatus: function(status) {
-    if (!status) return "〰";
+  readStatus: function(member) {
+    if (!member.presence) return "";
+    if (!member.presence.activities[0]) return "";
+    let status = member.presence.activities[0];
     switch (status.type) {
       case "PLAYING":
         return "Joue à " + status.name;
@@ -298,20 +321,11 @@ module.exports = {
     }
   },
 
-
-  createEmbed: function(buttons) {
-    var embed = new Discord.MessageEmbed()
-      .setImage("https://media.discordapp.net/attachments/750711837355671612/860149710534606888/void.png")
-    // .setColor("#2f3136")
-    return embed;
-  },
-
   enableAllButtons: function(buttons) { // FONCTION D'ACTIVATION DE TOUT LES BOUTONS
     buttons.forEach((button, i) => { // POUR CHAQUES BOUTONS
       button.setDisabled(false); // ACTIVATION
     });
   },
-
 
   readDate: function(x) {
     var new_time = [];
@@ -395,6 +409,52 @@ module.exports = {
     return new_time;
   },
 
+  getConfigFor: async function(guild, command, variable) {
+    var channel = guild.channels.cache.find(c => c.name.includes('akume-config'));
+    if (channel) {
+      var last_message = await channel.messages.fetch({
+        limit: 1
+      });
+    }
+    if (channel && last_message.first()) {
+      last_message = last_message.first().content.split("\n");
+      last_message.shift();
+      last_message.pop();
+      var server_config = new Object;
+      var c = "";
+      last_message.forEach((item, i) => {
+        if (item.startsWith("[")) {
+          server_config[item.split("[")[1].split("]")[0]] = {};
+          c = item.split("[")[1].split("]")[0];
+        } else if (!item == "") {
+          if (item.split(":")[0] == "random") {
+            server_config[c][item.split(":")[0]] = item.split(": ")[1].split(",");
+          } else {
+            server_config[c][item.split(":")[0]] = item.split(": ")[1];
+          }
+        }
+      });
 
+      if (command == "all") return server_config;
+
+      if (server_config[command] && server_config[command][variable]) {
+        return server_config[command][variable];
+      } else if (server_config["general"] && server_config["general"][variable]) {
+        return server_config["general"][variable];
+      } else if (default_config[command][variable]) {
+        return default_config[command][variable];
+      } else {
+        return default_config["general"][variable];
+      }
+
+    } else {
+      if (default_config[command][variable]) {
+        return default_config[command][variable];
+      } else {
+        return default_config["general"][variable];
+      }
+    }
+
+  },
 
 }

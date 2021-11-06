@@ -98,6 +98,21 @@ Akume.login(token.key);
 
 // ----------------------------------------------------------------------------------
 function slashCommands() {
+  Akume.commands.each((command) => {
+    if (command.name == "help") {
+      command.options[0].choices = Akume.commands.map(function(cmd) {
+        let obj = {
+          name: cmd.name,
+          value: cmd.name
+        }
+        return obj;
+      })
+      command.options[0].choices.push({
+        name: "Toutes les commandes",
+        value: "toutes_les_commandes"
+      })
+    }
+  })
   let guildId;
   // guildId = "658715456768573470";
   // Akume.guilds.cache.get("658715456768573470").commands.set([]);

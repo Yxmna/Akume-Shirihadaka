@@ -3,7 +3,7 @@ module.exports = {
   description: "Afficher l'aide",
   options: [{
     name: "commande",
-    type: "STRING",
+    type: 3,
     description: "Afficher l'aide d'une commande en particulier",
     required: false,
     choices: []
@@ -74,7 +74,7 @@ module.exports = {
           }
           let type;
           switch (option.type) {
-            case "STRING":
+            case 3:
               type = "texte";
               break;
             case "INTEGER":

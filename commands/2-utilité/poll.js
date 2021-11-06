@@ -3,57 +3,57 @@ module.exports = {
   description: "Créer un sondage",
   options: [{
     name: "question",
-    type: "STRING",
+    type: 3,
     description: "Choisir le titre ou la question du sondage",
     required: true,
   }, {
     name: "choix-1",
-    type: "STRING",
+    type: 3,
     description: "Définir le 1er choix",
     required: true,
   }, {
     name: "choix-2",
-    type: "STRING",
+    type: 3,
     description: "Définir le 2ème choix",
     required: true,
   }, {
     name: "choix-3",
-    type: "STRING",
+    type: 3,
     description: "Définir le 3ème choix",
     required: false,
   }, {
     name: "choix-4",
-    type: "STRING",
+    type: 3,
     description: "Définir le 4ème choix",
     required: false,
   }, {
     name: "choix-5",
-    type: "STRING",
+    type: 3,
     description: "Définir le 5ème choix",
     required: false,
   }, {
     name: "choix-6",
-    type: "STRING",
+    type: 3,
     description: "Définir le 6ème choix",
     required: false,
   }, {
     name: "choix-7",
-    type: "STRING",
+    type: 3,
     description: "Définir le 7ème choix",
     required: false,
   }, {
     name: "choix-8",
-    type: "STRING",
+    type: 3,
     description: "Définir le 8ème choix",
     required: false,
   }, {
     name: "choix-9",
-    type: "STRING",
+    type: 3,
     description: "Définir le 9ème choix",
     required: false,
   }, {
     name: "type-de-sondage",
-    type: "STRING",
+    type: 3,
     description: "Définir le type de sondage",
     required: false,
     choices: [{

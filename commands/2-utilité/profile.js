@@ -3,7 +3,7 @@ module.exports = {
   description: "Afficher le profile",
   options: [{
     name: "utilisateur",
-    type: "USER",
+    type: 6,
     description: "Choisir une personne avec son ID ou en la mentionnant",
     required: false
   }],

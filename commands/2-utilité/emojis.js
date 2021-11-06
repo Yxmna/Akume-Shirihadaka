@@ -3,7 +3,7 @@ module.exports = {
   description: "Afficher les emojis du serveur",
   options: [{
     name: "type",
-    type: "STRING",
+    type: 3,
     description: "Choisir le type de liste",
     required: false,
     choices: [{

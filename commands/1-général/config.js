@@ -5,7 +5,7 @@ module.exports = {
   options: [{
     name: "commandes",
     description: "Choisir la commande",
-    type: "STRING",
+    type: 3,
     required: false,
     choices: [{
       name: "Démarrer la vérification",
@@ -17,7 +17,7 @@ module.exports = {
   }, {
     name: "valeur-par-défaut",
     description: "Afficher les valeurs par défaut",
-    type: "STRING",
+    type: 3,
     required: false,
     choices: [{
       name: "Afficher les valeurs par défaut",

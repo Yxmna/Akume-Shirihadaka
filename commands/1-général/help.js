@@ -26,6 +26,7 @@ module.exports = {
     var sendAllCommands_id = "allcommands_" + Math.floor(Math.random() * 100000);
     var akumeInfo_id = "allcommands_" + Math.floor(Math.random() * 100000);
     var legend_id = "legend_" + Math.floor(Math.random() * 100000);
+    var english_id = "allcommands_" + Math.floor(Math.random() * 100000);
     var embed_color = await functions.getConfigFor(int.guild, "help", "embed-color");
     var embed_image = await functions.getConfigFor(int.guild, "help", "embed-image");
     // ----------------------------------------------------------------------------------
@@ -118,8 +119,9 @@ module.exports = {
           .setLabel("Informations sur Akume")
           .setStyle("SECONDARY"))
         .addComponents(new MessageButton()
-          .setCustomId("english_version")
-          .setLabel("English version")
+          .setCustomId(english_id)
+          .setEmoji("🇬🇧")
+          .setLabel("English help")
           .setStyle("SECONDARY"))
       const help_embed = functions.createEmbed(embed_color, embed_image)
         .setTitle("<:HELP_ICON:904516839403585546>  Page d'aide")
@@ -211,7 +213,7 @@ module.exports = {
         })
         interaction.deferUpdate();
       }
-      if (interaction.customId == "english_version") {
+      if (interaction.customId == english_id) {
         const english_help_embed = functions.createEmbed(embed_color, embed_image)
           .setTitle("<:HELP_ICON:904516839403585546>  Help page")
           .addField("To use the commands", "<:test_emoji_1:860263483194081311> Start by typing `/`, a list of all the commands available on your server will now be displayed\nThen click on Akume's avatar to automatically scroll to the right place")

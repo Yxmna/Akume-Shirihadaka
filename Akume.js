@@ -84,7 +84,9 @@ Akume.on('messageCreate', message => {
 // ----------------------------------------------------------------------------------
 // AKUME PRET
 Akume.on("ready", async () => {
+
   // Akume.guilds.cache.get("658715456768573470").commands.set([]);
+
   console.log("Akume est prète");
   console.log("----------------------------------------------------------------------------------");
   console.log();
@@ -103,12 +105,12 @@ Akume.on("ready", async () => {
         value: "toutes_les_commandes"
       })
     }
-    Akume.application.commands.create(command).then().catch(function(err) {
+    /*Akume.application.commands.create(command).then().catch(function(err) {
       console.log(err);
-    })
+    })*/
     // Akume.guilds.cache.get("658715456768573470").commands.create(command);
   })
-// */
+  // */
 })
 // ----------------------------------------------------------------------------------
 

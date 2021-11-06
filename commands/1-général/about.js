@@ -21,7 +21,7 @@ module.exports = {
     var total_size = 0;
     let all_dirs = [];
     props.categorys.forEach((category, i) => {
-      all_dirs.push(process.cwd() + "\\commands\\" + (i + 1) + "-" + category);
+      all_dirs.push(process.cwd() + "/commands/" + (i + 1) + "-" + category);
     });
     all_dirs.push(process.cwd());
     all_dirs.forEach((dir, i) => {

@@ -27,7 +27,7 @@ module.exports = {
     all_dirs.forEach((dir, i) => {
       fileCount = fileCount + fs.readdirSync(dir).length;
       fs.readdirSync(dir).forEach((file, i) => {
-        total_size = total_size + (fs.statSync(dir + "\\" + file).size / 1000);
+        total_size = total_size + (fs.statSync(dir + "/" + file).size / 1000);
       });
     });
     total_size = Math.floor(total_size * (1000 / 1024) * 10) / 10;

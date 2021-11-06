@@ -448,6 +448,8 @@ module.exports = {
       }
 
     } else {
+
+      if (command == "all") return {};
       if (default_config[command][variable]) {
         return default_config[command][variable];
       } else {

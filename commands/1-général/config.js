@@ -81,9 +81,9 @@ module.exports = {
     // ----------------------------------------------------------------------------------
 
     // ----------------------------------------------------------------------------------
-    if (!int.options.get("command") || int.options.get("command").value == "vérification") {
+    if (!int.options.get("commandes") || int.options.get("commandes").value == "vérification") {
       verification();
-    } else if (int.options.get("command") && int.options.get("command").value == "aide") {
+    } else if (int.options.get("commandes") && int.options.get("commandes").value == "aide") {
       displayHelp(true);
     }
     // ----------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ module.exports = {
       }
       embed
         .addField("Etape 1", "Créer une salon textuelle avec `akume-config` dans le nom")
-        .addField("Etape 2", "Envoyez dans le salon le message suivant : (ce sont les valeurs pas défault) \n```\n" + "```ini\n[general]\ncolor: random\nsize: 14\nrandom: 🟥,🟧,🟨,🟩,🟦,🟪,🟫\n\n[poll]\ncolor: random\nsize: 14\nrandom: 🟥,🟧,🟨,🟩,🟦,🟪,🟫\n`` `" + " ```⚠ Attention, l'espace avant le dernier `` ` dois être retiré")
+        .addField("Etape 2", "Envoyez dans le salon le message suivant : (ce sont des valeurs pas défault) \n```\n" + "```ini\n[general]\ncolor: random\nsize: 14\nrandom: 🟥,🟧,🟨,🟩,🟦,🟪,🟫\n\n[poll]\ncolor: random\nsize: 14\nrandom: 🟥,🟧,🟨,🟩,🟦,🟪,🟫\n`` `" + " ```⚠ Attention, l'espace avant le dernier `` ` dois être retiré")
         .addField("Etape 3", "Éditez votre message pour y entrer vos valeurs")
         .addField("Note:", "Utilisez `/config aide` pour afficher cette aide")
         .setFooter("Page 1/3");

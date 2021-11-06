@@ -37,10 +37,10 @@ module.exports = {
     });
 
     var buttons = new MessageActionRow()
-      .addComponents(new MessageButton()
+      /*.addComponents(new MessageButton()
         .setStyle("LINK")
         .setLabel("Rejoindre le serveur")
-        .setURL("https://discord.gg/8ZcfCkpuNC"))
+        .setURL("https://discord.gg/8ZcfCkpuNC"))*/
       .addComponents(new MessageButton()
         .setStyle("LINK")
         .setLabel("Github")
@@ -56,8 +56,7 @@ module.exports = {
       .setDescription("```Version " + version + "```")
       .addField("Informations", ">>> `" + (Math.floor((process.memoryUsage().external / 1000000) * 100) / 100) + "` Mb d'utilisation\n`" + total_size + "` Ko de fichiers\n`" + process.version + "` Node-js\n`" + Discord.version + "` Discord.js", true)
       .addField("Statistiques", ">>> `" + Akume.guilds.cache.size + "` Serveurs\n`" + user_count + "` Utilisateurs\n`" + Akume.commands.size + "` Commandes" + "\n`" + fileCount + "` Fichiers", true)
-      .addField("Liens", "[Rejoignez le serveur !](https://discord.gg/8ZcfCkpuNC)")
-      .setFooter("")
+      .addField("Support", "[Rejoignez le serveur !](https://discord.gg/8ZcfCkpuNC)")
 
     if (!int_button) {
       int.reply({

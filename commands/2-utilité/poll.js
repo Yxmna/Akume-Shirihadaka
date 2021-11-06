@@ -166,6 +166,11 @@ module.exports = {
       for (var i = 0; i < choices.length; i++) {
         poll_embed.addField(choices[i].value, poll_emojis[i] + "\xa0\xa0" + makeBar((choices[i].votes.length / total * size), size));
       }
+      if (total > 1) {
+        poll_embed.setFooter(total + " votes");
+      } else {
+        poll_embed.setFooter(total + " vote");
+      }
       return poll_embed;
     }
     // ----------------------------------------------------------------------------------

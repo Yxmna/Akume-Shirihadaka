@@ -87,7 +87,7 @@ Akume.on("ready", async () => {
   console.log("Akume est prète");
   console.log("-------------------------------------------");
   console.log();
-  slashCommands();
+  // slashCommands();
 })
 // ----------------------------------------------------------------------------------
 

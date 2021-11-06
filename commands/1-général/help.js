@@ -117,13 +117,21 @@ module.exports = {
           .setCustomId(akumeInfo_id)
           .setLabel("Informations sur Akume")
           .setStyle("SECONDARY"))
+        .addComponents(new MessageButton()
+          .setCustomId("english_version")
+          .setLabel("English version")
+          .setStyle("SECONDARY"))
       const help_embed = functions.createEmbed(embed_color, embed_image)
         .setTitle("<:HELP_ICON:904516839403585546>  Page d'aide")
-        .setFooter("Akume Shirihadaka version BETA")
         .addField("Pour utiliser les commandes", "<:test_emoji_1:860263483194081311> Commencez par faire `/`, une liste de toutes les commandes disponibles sur votre serveur sera désormais affichée\nCliquez ensuite sur l'avatar d'Akume pour scroller automatiquement au bon endroit")
         .addField("Pour obtenir toutes les commandes", "<:test_emoji_1:860263483194081311> Utilisez la commande: `/help Toutes les commandes`")
         .setDescription("Salut " + int.member.displayName + " !\nJe suis Akume Shirihadaka<:BOT1:904526926360748063><:BOT2:904526955372753009>, un bot crée par Yomna")
         .setImage("")
+      if (Akume.user.id == "681516055004446720") {
+        help_embed.setFooter("Akume Shirihadaka version ALPHA")
+      } else {
+        help_embed.setFooter("Akume Shirihadaka version BETA")
+      }
       int.reply({
         embeds: [help_embed],
         components: [buttons]
@@ -198,6 +206,25 @@ module.exports = {
         interaction.message.edit({
           embeds: [legend_embed],
           components: [buttons]
+        }).catch(function(e) {
+          console.log(e);
+        })
+        interaction.deferUpdate();
+      }
+      if (interaction.customId == "english_version") {
+        const english_help_embed = functions.createEmbed(embed_color, embed_image)
+          .setTitle("<:HELP_ICON:904516839403585546>  Help page")
+          .addField("To use the commands", "<:test_emoji_1:860263483194081311> Start by typing `/`, a list of all the commands available on your server will now be displayed\nThen click on Akume's avatar to automatically scroll to the right place")
+          .addField("To get all the commands", "<:test_emoji_1:860263483194081311> Use the command: `/help Toutes les commandes`")
+          .setDescription("Hi " + int.member.displayName + " !\nI'm Akume Shirihadaka<:BOT1:904526926360748063><:BOT2:904526955372753009>, a bot created by Yomna\nI'm French so all the rest of the features will be in French.. Until maybe one day I learn English?")
+          .setImage("")
+        if (Akume.user.id == "681516055004446720") {
+          english_help_embed.setFooter("Akume Shirihadaka version ALPHA")
+        } else {
+          english_help_embed.setFooter("Akume Shirihadaka version BETA")
+        }
+        interaction.message.reply({
+          embeds: [english_help_embed]
         }).catch(function(e) {
           console.log(e);
         })

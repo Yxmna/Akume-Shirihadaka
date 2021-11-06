@@ -84,37 +84,51 @@ Akume.on('messageCreate', message => {
 // ----------------------------------------------------------------------------------
 // AKUME PRET
 Akume.on("ready", async () => {
-
-  // Akume.guilds.cache.get("658715456768573470").commands.set([]);
-
   console.log("Akume est prète");
-  console.log("----------------------------------------------------------------------------------");
+  console.log("-------------------------------------------");
   console.log();
-  // /*
-  Akume.commands.each((command) => {
-    if (command.name == "help") {
-      command.options[0].choices = Akume.commands.map(function(cmd) {
-        let obj = {
-          name: cmd.name,
-          value: cmd.name
-        }
-        return obj;
-      })
-      command.options[0].choices.push({
-        name: "Toutes les commandes",
-        value: "toutes_les_commandes"
-      })
-    }
-    /*Akume.application.commands.create(command).then().catch(function(err) {
-      console.log(err);
-    })*/
-    // Akume.guilds.cache.get("658715456768573470").commands.create(command);
-  })
-  // */
+  slashCommands();
 })
 // ----------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------
 // CONNEXION D'AKUME
 Akume.login(token.key);
+// ----------------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------------
+function slashCommands() {
+  let guildId;
+  // guildId = "658715456768573470";
+  // Akume.guilds.cache.get("658715456768573470").commands.set([]);
+  // Akume.application.commands.set([]);
+  const {
+    REST
+  } = require('@discordjs/rest');
+  const {
+    Routes
+  } = require('discord-api-types/v9');
+  const rest = new REST({
+    version: '9'
+  }).setToken(token.key);
+  (async () => {
+    try {
+      if (guildId) {
+        await rest.put(
+          Routes.applicationGuildCommands(Akume.application.id, guildId), {
+            body: Akume.commands
+          },
+        );
+      } else {
+        await rest.put(
+          Routes.applicationCommands(Akume.application.id), {
+            body: Akume.commands
+          },
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  })();
+}
 // ----------------------------------------------------------------------------------

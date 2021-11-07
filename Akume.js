@@ -79,29 +79,30 @@ Akume.on('interactionCreate', interaction => {
 // MESSAGE RECU
 Akume.on('messageCreate', message => {
   if (message.author.bot) return;
-  if (!message.guild.me.permissionsIn(message.channel).toArray().includes("VIEW_CHANNEL") || !message.guild.me.permissionsIn(message.channel).toArray().includes("SEND_MESSAGES") || !message.guild.me.permissionsIn(message.channel).toArray().includes("EMBED_LINKS")) {
-    let array = [];
-    if (!message.guild.me.permissionsIn(message.channel).toArray().includes("VIEW_CHANNEL")) {
-      array.push("<:CROSS:904511913491324939> Voir le salon (VIEW_CHANNEL)");
-    } else {
-      array.push("<:CHECK:904511902078619698> Voir le salon (VIEW_CHANNEL)");
-    }
-    if (!message.guild.me.permissionsIn(message.channel).toArray().includes("SEND_MESSAGES")) {
-      array.push("<:CROSS:904511913491324939> Envoyer des messages (SEND_MESSAGES)");
-    } else {
-      array.push("<:CHECK:904511902078619698> Envoyer des messages (SEND_MESSAGES)");
-    }
-    if (!message.guild.me.permissionsIn(message.channel).toArray().includes("EMBED_LINKS")) {
-      array.push("<:CROSS:904511913491324939> Intégrer des liens (EMBED_LINKS)");
-    } else {
-      array.push("<:CHECK:904511902078619698> Intégrer des liens (EMBED_LINKS)");
-    }
-    message.author.send({
-      content: "Je n'ai pas la permission de voir et/ou d'écrire et/ou d'intégrer des liens dans ce salon\n" + array.join("\n")
-    })
-    return;
-  };
   if (message.content == "<@!" + Akume.user.id + ">") {
+    if (!message.guild.me.permissionsIn(message.channel).toArray().includes("VIEW_CHANNEL") || !message.guild.me.permissionsIn(message.channel).toArray().includes("SEND_MESSAGES") || !message.guild.me.permissionsIn(message.channel).toArray().includes("EMBED_LINKS")) {
+      let array = [];
+      if (!message.guild.me.permissionsIn(message.channel).toArray().includes("VIEW_CHANNEL")) {
+        array.push("<:CROSS:904511913491324939> Voir le salon (VIEW_CHANNEL)");
+      } else {
+        array.push("<:CHECK:904511902078619698> Voir le salon (VIEW_CHANNEL)");
+      }
+      if (!message.guild.me.permissionsIn(message.channel).toArray().includes("SEND_MESSAGES")) {
+        array.push("<:CROSS:904511913491324939> Envoyer des messages (SEND_MESSAGES)");
+      } else {
+        array.push("<:CHECK:904511902078619698> Envoyer des messages (SEND_MESSAGES)");
+      }
+      if (!message.guild.me.permissionsIn(message.channel).toArray().includes("EMBED_LINKS")) {
+        array.push("<:CROSS:904511913491324939> Intégrer des liens (EMBED_LINKS)");
+      } else {
+        array.push("<:CHECK:904511902078619698> Intégrer des liens (EMBED_LINKS)");
+      }
+      message.author.send({
+        content: "Je n'ai pas la permission de voir et/ou d'écrire et/ou d'intégrer des liens dans <#" + message.channel.id + ">" + "\n" + array.join("\n")
+      })
+      return;
+    };
+
     let props = {
       interaction: message,
       functions: functions,

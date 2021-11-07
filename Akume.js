@@ -35,7 +35,7 @@ categorys.forEach((category, i) => {
 // ----------------------------------------------------------------------------------
 // INTERACTION RECU
 Akume.on('interactionCreate', interaction => {
-  if (!message.guild) return;
+  if (!interaction.guild) return;
   if (!interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("VIEW_CHANNEL") || !interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("SEND_MESSAGES") || !interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("EMBED_LINKS")) {
     let array = [];
     if (!interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("VIEW_CHANNEL")) {
@@ -79,8 +79,8 @@ Akume.on('interactionCreate', interaction => {
 // ----------------------------------------------------------------------------------
 // MESSAGE RECU
 Akume.on('messageCreate', message => {
-  if (message.author.bot) return;
   if (!message.guild) return;
+  if (message.author.bot) return;
   if (message.content == "<@!" + Akume.user.id + ">") {
     if (!message.guild.me.permissionsIn(message.channel).toArray().includes("VIEW_CHANNEL") || !message.guild.me.permissionsIn(message.channel).toArray().includes("SEND_MESSAGES") || !message.guild.me.permissionsIn(message.channel).toArray().includes("EMBED_LINKS")) {
       let array = [];

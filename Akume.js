@@ -17,7 +17,7 @@ const categorys = fs.readdirSync("./commands").map(category => category.split("-
 const token = require('./key.json');
 const config = require('./config.json');
 const functions = require("./functions.js");
-var version = "0.1.1";
+var version = "0.1.2";
 // ----------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------
@@ -35,6 +35,7 @@ categorys.forEach((category, i) => {
 // ----------------------------------------------------------------------------------
 // INTERACTION RECU
 Akume.on('interactionCreate', interaction => {
+  if (!message.guild) return;
   if (!interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("VIEW_CHANNEL") || !interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("SEND_MESSAGES") || !interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("EMBED_LINKS")) {
     let array = [];
     if (!interaction.guild.me.permissionsIn(interaction.channel).toArray().includes("VIEW_CHANNEL")) {
@@ -79,6 +80,7 @@ Akume.on('interactionCreate', interaction => {
 // MESSAGE RECU
 Akume.on('messageCreate', message => {
   if (message.author.bot) return;
+  if (!message.guild) return;
   if (message.content == "<@!" + Akume.user.id + ">") {
     if (!message.guild.me.permissionsIn(message.channel).toArray().includes("VIEW_CHANNEL") || !message.guild.me.permissionsIn(message.channel).toArray().includes("SEND_MESSAGES") || !message.guild.me.permissionsIn(message.channel).toArray().includes("EMBED_LINKS")) {
       let array = [];

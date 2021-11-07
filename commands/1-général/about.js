@@ -8,7 +8,6 @@ module.exports = {
   accessableby: "all",
   status: 1,
   async execute(props, int_button) {
-    var version = "BETA 0.1.0";
     const int = props.interaction;
     const functions = props.functions;
     const Akume = props.akume;
@@ -53,7 +52,7 @@ module.exports = {
     let embed = functions.createEmbed(embed_color, embed_image)
       .setAuthor("Akume Shirihadaka", Akume.user.displayAvatarURL())
       .setTitle("Réveillé <t:" + Math.floor((Date.now() - Akume.uptime) / 1000) + ":R>")
-      .setDescription("```Version " + version + "```")
+      .setDescription("```Version " + props.version + "```")
       .addField("Informations", ">>> `" + (Math.floor((process.memoryUsage().external / 1000000) * 100) / 100) + "` Mb d'utilisation\n`" + total_size + "` Ko de fichiers\n`" + process.version + "` Node-js\n`" + Discord.version + "` Discord.js", true)
       .addField("Statistiques", ">>> `" + Akume.guilds.cache.size + "` Serveurs\n`" + user_count + "` Utilisateurs\n`" + Akume.commands.size + "` Commandes" + "\n`" + fileCount + "` Fichiers", true)
       .addField("Support", "[Rejoignez le serveur !](https://discord.gg/8ZcfCkpuNC)")

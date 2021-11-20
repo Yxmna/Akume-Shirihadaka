@@ -117,7 +117,7 @@ module.exports = {
       if (member.presence) {
         switch (member.presence.status) {
           case "online":
-            status = "<:ONLINE:904504568296140871> En ligne"
+            status = "<:ONLINE:909161988989542400> En ligne"
             break;
           case "dnd":
             status = "<:DND:904504600097353728> Ne pas déranger"

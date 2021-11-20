@@ -176,7 +176,7 @@ module.exports = {
       });
       embed
         .setTitle("<:COMMAND_ICON:904528247587487815>  Liste de toutes les commandes", "https://media.discordapp.net/attachments/681838885000577041/683342502157484186/Sans_titre-1.png")
-        .setDescription("``` Catégorie: " + category + " (" + commands.size + " commandes)```   _ _")
+        .setDescription("```Catégorie: " + category + " (" + commands.size + " commandes)```")
         .setFooter("Page " + page + "/" + (categorys.length + 1) + " • " + category);
       buttons.components[page - 1].setDisabled(true);
       return embed;
@@ -199,9 +199,9 @@ module.exports = {
       if (interaction.customId == legend_id) {
         const legend_embed = functions.createEmbed(embed_color, embed_image)
           .setTitle("<:HELP_ICON:904516839403585546>  Légende")
-          .setDescription("``` Catégorie: légende```")
+          .setDescription("```Catégorie: légende```")
           .addField("<:akume_square:904397824190447737> `nom_de_la_commande` `arguements_de_la_commande`", "<:test_emoji_1:860263483194081311> Description_de_la_commande")
-          .addField("Statut possible des commandes", "<:CHECK:904421039952502844>: La commande fonctionne correctement\n<:CROSS:904421050614419527>: La commande ne fonctionne plus ou n'est plus disponibles\n<:BUGHUNTER_LEVEL_1:904494049975738409>: La commande ne fonctionne plus correctement et/ou est en cours de développement/correction")
+          .addField("Statut possible des commandes", "<:CHECK:904511902078619698>: La commande fonctionne correctement\n<:CROSS:904511913491324939>: La commande ne fonctionne plus ou n'est plus disponibles\n<:BUGHUNTER_LEVEL_1:904494049975738409>: La commande ne fonctionne plus correctement et/ou est en cours de développement/correction")
           .setFooter("Page 4/4 • légende")
         functions.enableAllButtons(buttons.components);
         buttons.components[3].setDisabled(true);

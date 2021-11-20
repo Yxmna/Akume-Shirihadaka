@@ -287,6 +287,81 @@ module.exports = {
     return perm;
   },
 
+  readFeatures: function(features) {
+    let bonus = [];
+    features.forEach((feature, i) => {
+      switch (feature) {
+        case "ANIMATED_ICON":
+          bonus.push("Icône animé")
+          break;
+        case "BANNER":
+          bonus.push("Bannière")
+          break;
+        case "COMMERCE":
+          bonus.push("Salon commerce")
+          break;
+        case "COMMUNITY":
+          bonus.push("Communauté")
+          break;
+        case "DISCOVERABLE":
+          bonus.push("Découvrable dans l'annuaire")
+          break;
+        case "FEATURABLE":
+          bonus.push("Présentable dans l'annuaire")
+          break;
+        case "INVITE_SPLASH":
+          bonus.push("Fond d'écran d'invitation")
+          break;
+        case "MEMBER_VERIFICATION_GATE_ENABLED":
+          bonus.push("Filtrage des membres")
+          break;
+        case "NEWS":
+          bonus.push("Salon annonce")
+          break;
+        case "PARTNERED":
+          bonus.push("Partenaire")
+          break;
+        case "PREVIEW_ENABLED":
+          bonus.push("Membre provisoire")
+          break;
+        case "VANITY_URL":
+          bonus.push("Liens personnalisé")
+          break;
+        case "VERIFIED":
+          bonus.push("Vérifié")
+          break;
+        case "VIP_REGIONS":
+          bonus.push("Régions VIP")
+          break;
+        case "WELCOME_SCREEN_ENABLED":
+          bonus.push("Écran d'accueil")
+          break;
+        case "TICKETED_EVENTS_ENABLED":
+          bonus.push("Événements avec billets")
+          break;
+        case "MONETIZATION_ENABLED":
+          bonus.push("Monétisation")
+          break;
+        case "MORE_STICKERS":
+          bonus.push("Plus de stickers personnalisés")
+          break;
+        case "THREE_DAY_THREAD_ARCHIVE":
+          bonus.push("Thread de trois jours")
+          break;
+        case "SEVEN_DAY_THREAD_ARCHIVE":
+        bonus.push("Thread de sept jours")
+          break;
+        case "PRIVATE_THREADS":
+          bonus.push("Thread privé")
+          break;
+        case "ROLE_ICONS":
+          bonus.push("Rôle icon")
+          break;
+      }
+    });
+    return bonus;
+  },
+
   readStatus: function(member) {
     if (!member.presence) return "";
     if (!member.presence.activities[0]) return "";

@@ -17,7 +17,7 @@ const categorys = fs.readdirSync("./commands").map(category => category.split("-
 const token = require('./key.json');
 const config = require('./config.json');
 const functions = require("./functions.js");
-var version = "0.1.2";
+var version = "0.1.3";
 // ----------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------
@@ -127,7 +127,14 @@ Akume.on("ready", async () => {
   console.log("Akume est prète");
   console.log("-------------------------------------------");
   console.log();
-  // slashCommands();
+  slashCommands();
+})
+// ----------------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------------
+// ERREUR
+Akume.on("error", async (e) => {
+  console.log(e);
 })
 // ----------------------------------------------------------------------------------
 

@@ -35,5 +35,9 @@
   },
   "profile": {
     "embed-color": "#202225"
+  },
+  "guild": {
+    "embed-color": "#202225",
+    "embed-image": "https://cdn.discordapp.com/attachments/822787638615474176/904669380485447700/split-bar.png"
   }
 }
